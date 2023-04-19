@@ -80,7 +80,7 @@ public class Partido {
         char resultado = 'X';
         
         if (equipo.getNombre().equals(equipo1.getNombre())) {
-            //No se porque este error
+            
             if (this.golesEquipo1 > this.golesEquipo2){
                 resultado = 'G';
              }else if (this.golesEquipo1 < this.golesEquipo2){
