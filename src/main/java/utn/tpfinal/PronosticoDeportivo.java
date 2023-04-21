@@ -19,26 +19,22 @@ public class PronosticoDeportivo {
     
     public void play(){
       
-        System.out.println("Los equipos participantes son: " + equipos.listar());
+        System.out.println("Los equipos participantes son: " );
         equipos.cargarDeDB();
         
         System.out.println("");
         
-        System.out.println("Los Resultados de los partidos son: " + partidos.listar());
+        System.out.println("Los Resultados de los partidos son: " );
         System.out.println("Iden." + " Equi 1 " + " Equi 2 " + " Gol E1 " + " Gol E2 ");
         partidos.cargarDeDB();
         
         System.out.println("");
-        System.out.println("Los Participantes son: " + participantes.listar());
+        System.out.println("Los Participantes son: " );
         System.out.println("Iden.   " + "    Nombre ");
         participantes.cargarDeDB();
-        // Una vez cargados los participantes, para cada uno de ellos
-        // cargar sus pronósticos
-        //for (Participante p : participantes.getParticipantes()) {
-            //p.cargarPronosticos(equipos, partidos);
-        //}
+       
         System.out.println("");
-        System.out.println("Los^Pronosticos de los participantes son: " + pronosticos.listar());
+        System.out.println("Los^Pronosticos de los participantes son: " );
         System.out.println("Iden." + " Partic. " + "Partido " + "Equipo " + "Result ");
         pronosticos.cargarDeDB();
     }

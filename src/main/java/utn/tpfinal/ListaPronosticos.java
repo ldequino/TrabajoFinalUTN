@@ -65,23 +65,30 @@ public class ListaPronosticos {
         return lista;
     }
 
-     public void cargarDeDB() {
-    Connection conn = null;
+     public void cargarDeDB()
+        
+         
+     {Connection conn = null;
         try {
            
             conn = DriverManager.getConnection("jdbc:sqlite:pronosticos.db");
             Statement stmt = conn.createStatement();
      
-            String sql = "SELECT idPronostico, idParticipante, IdPartido, idEquipo, resultado FROM pronosticos";
+            String sql = "SELECT idPronostico, idParticipante, IdPartido, idEquipo, resultado FROM pronosticos WHERE idParticipante  "; //+ idParticipante;
             ResultSet rs = stmt.executeQuery(sql); 
             while (rs.next()) {
-            
+                
                 System.out.println(rs.getInt("idPronostico") + "\t"
                         + rs.getString("idParticipante") + "\t"
                         + rs.getString("IdPartido") + "\t"
                         + rs.getString("idEquipo") + "\t"
                         + rs.getString("resultado") + "\t");
-                      
+                
+                //Partido partido = listapartidos.getPartido(rs.getInt("IdPartido"));
+                //Equipo equipo = listaequipos.getEquipo(rs.getInt("IdEquipo"));  
+                //Pronostico pronostico = new Pronostico(
+                //rs.getInt("idPronostico"), equipo, partido, rs.getString("resultado"),charAt(1));
+                //this.addPronostico(pronostico);
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -95,7 +102,11 @@ public class ListaPronosticos {
                 System.out.println(e.getMessage());
             }
         }
+        
     }
+
+    
+    
      
 }
 

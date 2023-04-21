@@ -86,11 +86,7 @@ public class ListaEquipos {
                 System.out.println(rs.getInt("idEquipo") + "\t"
                         + rs.getString("Nombre") + "\t"
                         + rs.getString("Descripcion") + "\t");
-                       //Equipo e = new Equipo(
-                         //rs.getInt("idEquipo"),
-                         // rs.getString("Nombre"),
-                      //rs.getString("Descripcion"));
-                       // lista.addEquipo(e);
+                     
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -104,6 +100,10 @@ public class ListaEquipos {
                 System.out.println(e.getMessage());
             }
         }
+    }
+
+    Equipo getEquipo(int aInt) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }
 
