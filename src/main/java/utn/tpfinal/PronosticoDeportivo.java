@@ -2,17 +2,7 @@
 
 package utn.tpfinal;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+
 
 public class PronosticoDeportivo {
     private final ListaEquipos equipos;
@@ -44,11 +34,12 @@ public class PronosticoDeportivo {
         participantes.cargarDeDB();
         // Una vez cargados los participantes, para cada uno de ellos
         // cargar sus pronósticos
-        for (Participante p : participantes.getParticipantes()) {
-            p.cargarPronosticos(equipos, partidos);
-        }
-        
+        //for (Participante p : participantes.getParticipantes()) {
+            //p.cargarPronosticos(equipos, partidos);
+        //}
+        System.out.println("");
         System.out.println("Los^Pronosticos de los participantes son: " + pronosticos.listar());
-        
+        System.out.println("Iden." + " Partic. " + "Partido " + "Equipo " + "Result ");
+        pronosticos.cargarDeDB();
     }
 }
