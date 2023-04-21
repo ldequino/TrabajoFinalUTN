@@ -65,32 +65,10 @@ public class Participante {
         this.puntaje = puntaje;
     }
    
-    
-
-    // retorna el puntaje del participando calculando los valores de los pronosticos
-    public int getPuntaje() {
-        // Para ver el puntaje debo recorrer los pronosticos y ver el puntaje
-        // de cada uno y acumularlo. Debo devolver el total.
-        int puntaje = 0;
-        // el primer mensaje corresponde al atributo pronosticos de parrticipante
-        // el segundo mensaje corresponde a la lista que tiene el atributo pronosticos
-        // de esa lista se obtiene cada pronostico y se saca el puntaje acumulandolo en 
-        // la variable puntaje
-        for (Pronostico p : this.getPronosticos().getPronosticos()) {
-            puntaje += p.getPuntaje();
-        }
-        return puntaje;
-    }
-
         @Override
         public String toString() {
         return "Participante " + idParticipante + " nombre " + nombre + " su pronostico " + pronosticos;// + "su puntaje " + getPuntaje();
     }    
-    
-    void cargarPronosticos (ListaEquipos equipos, ListaPartidos partidos) {
-
-        this.pronosticos.cargarDeDB(this.getIdParticipante(), equipos, partidos);
-    }
 }
 
 

@@ -18,8 +18,6 @@ public class Pronostico {
 
    
     
-    
-    
     public Pronostico(int readidPronostico, Equipo equipo, Partido partido, char readResultado) {
         this.idPronostico = 0;
         this.Partido = null;
@@ -64,25 +62,4 @@ public class Pronostico {
         return "Pronostico{" + "idPronostico=" + idPronostico + ", Partido=" + Partido + ", Equipo=" + Equipo + ", Resultado=" + Resultado + '}';
     }
 
-    
-    public int puntos() {
-        int puntos = 0;
-        char pron = getResultado();
-
-        Partido partidoReal = getPartido();
-
-        char rfinal = partidoReal.Resultado();
-
-        if (pron == rfinal) {
-            puntos = +1;
-        } else {
-            if (pron != rfinal) {
-                puntos = +0;
-            }
-        }
-
-        return puntos;
-
-    }
 }
-

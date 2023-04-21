@@ -75,29 +75,4 @@ public class Partido {
         return "Partido Numero " + idPartido + ", Equipo " + equipo1 + " Consiguio " + golesEquipo1 + " Goles" + "   " + "Equipo " +  equipo2  + 
                  " Consiguio " + golesEquipo2 + " Goles";
     } 
-
-    public char getResultado(Equipo equipo) {
-        char resultado = 'X';
-        
-        if (equipo.getNombre().equals(equipo1.getNombre())) {
-            
-            if (this.golesEquipo1 > this.golesEquipo2){
-                resultado = 'G';
-             }else if (this.golesEquipo1 < this.golesEquipo2){
-                        resultado = 'P';
-              }else {
-                 resultado = 'E';
-                }
-             }else if (equipo.getNombre().equals(equipo2.getNombre())) {
-            if (this.golesEquipo2 > this.golesEquipo1){
-                resultado = 'G';
-             }else if (this.golesEquipo2 < this.golesEquipo1){
-                        resultado = 'P';
-              }else {
-                 resultado = 'E';
-              }
-              }
-            return resultado;
-      }
-  
   }

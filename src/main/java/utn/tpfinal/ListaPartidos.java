@@ -105,7 +105,6 @@ public class ListaPartidos {
                     conn.close();
                 }
             } catch (SQLException e) {
-                // conn close failed.
                 System.out.println(e.getMessage());
             }
         }

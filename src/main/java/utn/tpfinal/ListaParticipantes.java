@@ -53,30 +53,15 @@ public class ListaParticipantes {
         this.participantes.remove(p);
     }
     
-    /***
-     * Este método devuelve un Participante (o null) buscandolo por idParticipante
-     * @param idParticipante Identificador del equipo deseado
-     * @return Objeto Participante (o null si no se encuentra)
-     */
     public Participante getParticipante (int idParticipante) {
-        // Defini un objeto de tipo Participante en dónde va a ir mi resultado
-        // Inicialmente es null, ya que no he encontrado el equipo que 
-        // buscaba todavía.
         Participante encontrado = null;
-        // Recorro la lista de participantes que está cargada
         for (Participante eq : this.getParticipantes()) {
-            // Para cada equipo obtengo el valor del ID y lo comparo con el que
-            // estoy buscando
-            if (eq.getIdParticipante() == idParticipante) {
-                // Si lo encuentro (son iguales) lo asigno como valor de encontrado
+            if (eq.getIdParticipante() == idParticipante) { 
                 encontrado = eq;
-                // Y hago un break para salir del ciclo ya que no hace falta seguir buscando
                 break;
             }
         }
-        // Una vez fuera del ciclo retorno el Participante, pueden pasar dos cosas:
-        // 1- Lo encontré en el ciclo, entonces encontrado tiene el objeto encontrado
-        // 2- No lo encontré en el ciclo, entonces conserva el valor null del principio
+       
         return encontrado;
     }
 
@@ -94,9 +79,8 @@ public class ListaParticipantes {
     }
     
     public void cargarDeDB() {
-        
-      
- Connection conn = null;
+       
+     Connection conn = null;
         try {
            
             conn = DriverManager.getConnection("jdbc:sqlite:pronosticos.db");
@@ -122,7 +106,5 @@ public class ListaParticipantes {
                 System.out.println(e.getMessage());
             }
         }
-
-
     }
 }
