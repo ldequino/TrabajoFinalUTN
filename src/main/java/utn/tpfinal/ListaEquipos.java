@@ -6,14 +6,19 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-
-
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 
 public class ListaEquipos {
  
     private List<Equipo> equipos;
     private String equiposCSV;
+
 
     public ListaEquipos(List<Equipo> equipos, String equiposCSV) {
         this.equipos = equipos;
@@ -50,22 +55,6 @@ public class ListaEquipos {
     }
     
     
-    public Equipo getEquipo (int idEquipo) {
-        
-        Equipo encontrado = null;
-       
-        for (Equipo eq : this.getEquipos()) {
-            
-            if (eq.getIdEquipo() == idEquipo) {
-           
-                encontrado = eq;
-                
-                break;
-            }
-        }
-        
-        return encontrado;
-    }
 
     @Override
     public String toString() {
@@ -81,47 +70,42 @@ public class ListaEquipos {
     }
     
     
-    public void cargarDeArchivo() {
+    public void cargarDeDB() {
         
-        String datosEquipo;
-        
-        String vectorEquipo[];
-        
-        Equipo equipo;
-        int fila = 0;
-       
-        try { 
-            Scanner sc = new Scanner(new File(this.getEquiposCSV()));
-            sc.useDelimiter("\n");   
-                
-            while (sc.hasNext()) {
-                
-                datosEquipo = sc.next();
-                 
-                fila ++;
+      
+ Connection conn = null;
+        try {
+           
+            conn = DriverManager.getConnection("jdbc:sqlite:pronosticos.db");
+            Statement stmt = conn.createStatement();
+     
+            String sql = "SELECT idEquipo, Nombre, Descripcion FROM equipos";
+            ResultSet rs = stmt.executeQuery(sql); 
+            while (rs.next()) {
             
-                if (fila == 1)
-                    continue;              
-                 
-                
-                vectorEquipo = datosEquipo.split(",");   
-                
-                
-                int idEquipo = Integer.parseInt(vectorEquipo[0]);
-                String nombre = vectorEquipo[1];
-                String descripcion = vectorEquipo[2];
-               
-                equipo = new Equipo(idEquipo, nombre, descripcion);
-               
-                this.addEquipo(equipo);
+                System.out.println(rs.getInt("idEquipo") + "\t"
+                        + rs.getString("Nombre") + "\t"
+                        + rs.getString("Descripcion") + "\t");
+                       //Equipo e = new Equipo(
+                         //rs.getInt("idEquipo"),
+                         // rs.getString("Nombre"),
+                      //rs.getString("Descripcion"));
+                       // lista.addEquipo(e);
             }
-            
-        } catch (IOException ex) {
-                System.out.println("Mensaje: " + ex.getMessage());
-        }       
-
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException e) {
+                // conn close failed.
+                System.out.println(e.getMessage());
+            }
+        }
     }
-
 }
+
 
 

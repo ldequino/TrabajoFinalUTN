@@ -6,8 +6,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-
-
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 
 public class ListaPartidos {
@@ -73,50 +77,42 @@ public class ListaPartidos {
         }
         return lista;
     }
-
-    public void cargarDeArchivo(ListaEquipos equipos) {
-
-        String datosPartido;
-
-        String vectorPartido[];
-
-        Partido partido= new Partido();
-        int fila = 0;
-
+    public void cargarDeDB() {
+        
+      
+ Connection conn = null;
         try {
-            Scanner sc = new Scanner(new File(this.getPartidosCSV()));
-            sc.useDelimiter("\n");   //setea el separador de los datos
-
-            while (sc.hasNext()) {
-                datosPartido = sc.next();
-                fila++;
-                if (fila == 1) {
-                    continue;
-                }
-                
-                vectorPartido = datosPartido.split(",");
-                
-                int idPartido = Integer.parseInt(vectorPartido[0]);
-                String idEquipo1 = vectorPartido[1];
-                String idEquipo2 = vectorPartido[2];
-                int GolesEquipo1 = Integer.parseInt(vectorPartido[3]);
-                int GolesEquipo2 = Integer.parseInt(vectorPartido[4]);
-                
-               
-                partido = new Partido(idPartido, idEquipo1, idEquipo2, GolesEquipo1, GolesEquipo2);
-    
-                this.addPartido(partido);
+           
+            conn = DriverManager.getConnection("jdbc:sqlite:pronosticos.db");
+            Statement stmt = conn.createStatement();
+     
+            String sql = "SELECT idPartido, IdEquipo1, IdEquipo2, golesEquipo1, golesEquipo2 FROM partidos";
+            ResultSet rs = stmt.executeQuery(sql); 
+            while (rs.next()) {
+            
+                System.out.println(rs.getInt("idPartido") + "\t"
+                        + rs.getString("IdEquipo1") + "\t"
+                        + rs.getString("IdEquipo2") + "\t"
+                        + rs.getString("golesEquipo1") + "\t"
+                        + rs.getString("golesEquipo2") + "\t");
+                      
             }
-
-        } catch (IOException ex) {
-            System.out.println("Mensaje: " + ex.getMessage());
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException e) {
+                // conn close failed.
+                System.out.println(e.getMessage());
+            }
         }
-
     }
 
-    void cargarDeArchivo(ListaPartidos partidos) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+   
+    
 
 }
 

@@ -15,8 +15,6 @@ import java.sql.Statement;
 
 
 public class ListaPronosticos {
-
-    // atributo
     private List<Pronostico> pronosticos;
     private String pronosticosCSV;
 
@@ -46,7 +44,6 @@ public class ListaPronosticos {
         this.pronosticosCSV = pronosticosCSV;
     }
 
-    // add y remove elementos
     public void addPronostico(Pronostico p) {
         this.pronosticos.add(p);
     }
@@ -68,17 +65,16 @@ public class ListaPronosticos {
         return lista;
     }
 
-    // Cargar desde el archivo, filtrando solamente aquellos pronósticos
-    // cuyo idParticipante coincide con el indicado
-    // De esa forma todos los pronósticos de la lista pertenecen al mismo participante.
     public void cargarDeArchivo(
-            int idParticipante, // id del participante que realizó el pronóstico
-            ListaEquipos listaequipos, // lista de equipos
-            ListaPartidos listapartidos // lista de partidos
-    ) {
-        // para las lineas del archivo csv
+            int idParticipante, 
+            ListaEquipos listaequipos, 
+            ListaPartidos listapartidos)
+    {
+        
+        
+        
         String datosPronostico;
-        // para los datos individuales de cada linea
+       
         String vectorPronostico[];
 
         int fila = 0;
@@ -192,5 +188,6 @@ public class ListaPronosticos {
             System.out.println("Mensaje: " + ex.getMessage());
         }
     }
+     
 }
 
